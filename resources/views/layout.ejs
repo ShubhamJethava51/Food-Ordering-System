@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- icon of tab -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!--For Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!--embedding style files-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/app.css">
+    
+    <title>Kabir Foods</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="bg-white backdrop-blur-md bg-opacity-5 container mx-auto flex items-center justify-between py-6 px-10">
+        <div>
+            <a href="/" class="flex items-center justify-between">
+                <img src="/img/logo.png" alt="Logo" class="object-scale-down h-20">
+                <h4 class="ml-4 text-3xl text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-yellow-500 font-bold">Kabir Food Corner</h4>
+            </a>
+        </div>
+
+        <!-- Navigation Menu  -->
+        <div>
+            <ul class="flex item-center text-">
+                <li class="ml-6 text-lg"><a href="/menu">Menu</a></li>
+                <li class="ml-6 text-lg"><a href="#">Offers</a></li>
+                <% if(user) {%>
+                    <%if(user.role === 'admin'){%>
+                        <li class="ml-6 text-lg"><a href="/admin">Dashbord</a></li>
+                    <%}%>
+                    <li class="ml-6 text-lg"><a href="/<%=user.role%>/orders">Orders</a></li>
+                    <li class="ml-6 text-lg">
+                        <!-- we used form here because 'passport' uses 'logout()' mehod with post request -->
+                        <form id="logout" action="/logout" method="POST">
+                            <a onclick="document.getElementById('logout').submit()" href="#">Log out</a>
+                        </form>
+                    </li>
+                <% } else {%>
+                    <li class="ml-6 text-lg"><a href="/login">Login</a></li>
+                    <li class="ml-6 text-lg"><a class="btn-primary px-3 rounded-full py-1" href="/register">Register</a></li>
+                <% } %>
+                <li class="ml-6">
+                    <a href="/bag" class="rounded-full flex items-center text-center py-1 pr-1.5">
+                        <span id="bagItemsCount" class="text-white font-bold pl-2"><%= session.bag ? session.bag.totalQty : ""%></span>
+                        <i class="las la-shopping-bag text-4xl"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <%- body %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/app.js"></script>
+
+    <!-- footer -->
+
+</body>
+</html>

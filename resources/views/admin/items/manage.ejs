@@ -1,0 +1,67 @@
+<section class="manage-panel flex justify-center">
+    <div class="w-full max-w-xl py-24">
+
+        <%if(!messages.itemName){%>
+            <form action="/admin/items/add" method="POST" class="rounded-lg px-4 py-4" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <h1 class="text-2xl text-center">Add new items</h1>
+                </div>
+        <%}else{%>
+            <form action="/admin/items/update" method="POST" class="rounded-lg px-4 py-4" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <h1 class="text-2xl text-center">Update items</h1>
+                </div>
+            <%}%>
+            <div class="mb-4">
+                <span class="text-red-500 text-sm">
+                    <%if(messages.error){%>
+                        <%=messages.error%>
+                    <%} else {%>
+                        <%=messages.success%>
+                    <%}%>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="catName">
+                    Sub-Category Name:
+                </label>
+                <%if(!messages.subcatName){%>
+                    <input name="subcatName" value="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="catName" type="text" placeholder="Enter your sub-category name">    
+                <%}else{%>
+                    <input name="subcatName" value="<%=messages.subcatName%>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="catName" type="text" disabled>    
+                <%}%>
+                <input name="itemID" value="<%=messages.itemID%>" type="hidden">
+                <input name="itemImage" value="<%=messages.itemImage%>" type="hidden">
+            </div>
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="itemName">
+                    Name:
+                </label>
+                <input name="itemName" value="<%=messages.itemName%>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="itemName" type="text" placeholder="Enter your item name">    
+            </div>
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="description">
+                    Description:
+                </label>
+                <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description..."><%=messages.description%></textarea>
+            </div><div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="price">
+                    Price:
+                </label>
+                <input name="itemPrice" value="<%=messages.itemPrice%>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="itemPrice" type="text" placeholder="Enter your item price">                    
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="formFile">
+                    Image:
+                </label>
+                <input name="itemImage" class="form-control block w-full px-2 py-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile">
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="submit" class="btn-primary rounded-full px-4 py-1"><%=messages.itemName ? 'Update' : 'Add'%></button>
+            </div>
+        </form>
+    </div>
+</section>

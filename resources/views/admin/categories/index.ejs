@@ -1,0 +1,60 @@
+<section class="light-section px-10 py-12">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-bold mb-8 text-lg">All Categories:</h1>
+        <% if(messages.success) { %>
+            <div id="success-alert" class="flex items-center bg-green-500 rounded-lg shadow-lg text-white text-l font-bold px-4 py-3 mb-4">
+                <i class="las la-info mr-3"></i>
+                <p><%=messages.success%></p>
+            </div>
+        <%} else if(messages.error) {%>
+            <div id="success-alert" class="flex items-center bg-red-500 rounded-lg shadow-lg text-white text-l font-bold px-4 py-3 mb-4">
+                <i class="las la-info mr-3"></i>
+                <p><%=messages.error%></p>
+            </div>
+        <%}%>
+        <table class="tableOrder w-full table-auto">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Name</th>
+                    <th class="px-4 py-2 text-left">Description</th>
+                    <th class="px-4 py-2 text-left">Date</th>
+                    <th class="px-4 py-2 text-left">Image</th>
+                    <th class="px-4 py-2 text-left"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(categories.length) { %>
+                    <% categories.forEach((category) => {%>
+                        <tr>
+                            <td class="border border-gray-500 px-4 py-2 w-1/6"><%= category.name%></td>
+                            <td class="border border-gray-500 px-4 py-2"><%= category.description%></td>
+                            <td class="border border-gray-500 px-4 py-2"><%=moment(category.createdAt).format('DD/MM/YYYY')%></td>
+                            <td class="border border-gray-500 px-4 py-3 w-1/6">
+                                <img class="fieldImg rounded-lg" src="/img/categories/<%=category.image%>"></img>
+                            </td>
+                            <td class="border border-gray-500 px-4 py-2 flex h-44 items-center justify-evenly">
+                                <form action="/admin/categories/delete" method="post">
+                                    <input type="hidden" name="category" value="<%=category.name%>">
+                                    <button type="submit"><i class="rounded-full px-1 py-1 text-4xl lar la-trash-alt"></i></button>
+                                </form>
+                                <form action="/admin/categories/updateForm" method="post">
+                                    <input type="hidden" name="cat" value="<%=JSON.stringify(category)%>" />
+                                    <button type="submit"><i class="rounded-full text-4xl py-1 px-1 las la-edit"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td class="border px-4 py-2">
+                            No categories found!
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div class="my-6 float-right">
+            <a href="/admin/categories/manage" class="btn-primary text-2xl rounded-full px-2.5 pt-1"><i class="las la-plus"></i></a>
+        </div>
+    </div>
+</section>

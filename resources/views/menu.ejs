@@ -1,0 +1,52 @@
+<section class="container mx-auto py-8 px-10">
+    <h1 class="text-xl font-bold mb-8">Category:</h1>
+    <div class="grid grid-cols-3 gap-x-10 gap-y-15">
+        <%categories.forEach(function(category){%>
+        <div class="img-back rounded-xl shadow-xl">
+            <img class="img-dark rounded-xl" src="img/categories/<%=category.image%>" alt="<%=category.image%>">
+            <div class="text-for-image">
+                <h1 class="font-bold text-4xl mb-2 text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 to-lime-500"><%=category.name%></h1>
+                <p class="mb-6 text-gray-300"><%=category.description%></p>
+                <a class="btn-primary py-1 px-4 rounded-full cursor-pointer" href="/menu/categories/<%=category._id%>">Go to</a>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</section>
+
+<section class='menu container mx-auto py-8 px-10'>
+    <h1 class="text-xl font-bold mb-8">Dishes</h1>
+
+    <!--Displaying dishes card-->
+    
+    <div class="grid grid-cols-4 gap-x-24 gap-y-16">
+    
+        <% items.forEach(function(item){ %>
+            <div class="backdrop-blur-md bg-opacity-20 bg-emerald-900 w-64 pb-2 rounded-lg shadow-2xl">
+                <img class="h-40 mb-4 mx-auto rounded-lg" src="/img/items/<%= item.image %>" alt="<%= item.image %>">
+                <div class="rounded-lg py-2">
+                    <div class="text-center">
+                        <h2 class="mb-2 text-lg"><%= item.name %></h2>
+                        <p class="text-sm px-2 text-gray-400"><%= item.description %></p>
+                    </div>
+                    <div class="flex items-center justify-around mt-4">
+                        <span class="text-lg font-bold">₹<%= item.price %></span>
+                        
+                        <!-- 
+                            now while we got an item here, when we click the following 'add' button
+                            it'll store object 'item' which we get from homeController
+                            it have info about an item, and it'll store in an variable called 'item'
+                            it works just like a post request from form with some information
+                            which will be available in 'req.body'
+                        -->
+                        
+                        <button data-item="<%= JSON.stringify(item) %>" class="add-to-bag py-1 px-6 rounded-full flex items-center font-bold">
+                            <span>+</span>
+                            <span class="ml-4">Add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</section>

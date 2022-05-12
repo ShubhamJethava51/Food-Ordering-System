@@ -1,0 +1,54 @@
+<section class="container mx-auto px-10 py-6">
+    <div class="">
+        <h1 class="text-2xl">Manage:</h1>
+        <div class="flex mt-6 mx-12 justify-between">
+            <a href="/admin/categories" class="text-xl px-8 py-5 rounded-xl cursor-pointer transition-all ease-in-out bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                Categories:
+                <span class="ml-2 font-bold"><%=categoriesNum%></span>
+                <i class="las la-angle-double-right"></i>
+            </a>
+            <a href="/admin/subcategories" class="text-xl px-8 py-5 rounded-xl cursor-pointer transition-all ease-in-out bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                Sub-categories:
+                <span class="ml-2 font-bold"><%=subcategoriesNum%></span>
+                <i class="las la-angle-double-right"></i>
+            </a>
+            <a href="/admin/items" class="text-xl px-8 py-5 rounded-xl cursor-pointer transition-all ease-in-out bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
+                Items:
+                <span class="ml-2 font-bold"><%=itemsNum%></span>
+                <i class="las la-angle-double-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container mx-auto px-10 py-3">
+        <h1 class="text-lg font-bold mb-4">Users</h1>
+        <!-- <% if(messages.success) { %>
+        <div id="success-alert" class="flex items-center bg-green-500 text-white text-xl font-bold px-4 py-3 rounded-lg">
+            <i class="las la-info mr-3"></i>
+            <p><%=messages.success%></p>
+        </div>
+        <%}%> -->
+        <table class="tableOrder w-full table-auto text-center">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">E-mail</th>
+                    <th class="px-4 py-2">Orders</th>
+                    <th class="px-4 py-2">Joined Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%users.forEach((user)=>{%>
+                    <tr>
+                        <td class="px-4 py-2"><%=user.name%></td>
+                        <td class="px-4 py-2"><%=user.email%></td>
+                        <td class="px-4 py-2"><%=userOrderCount[user._id]%></td>
+                        <td class="px-4 py-2"><%=moment(user.createdAt).format('DD-MM-YYYY')%></td>
+                    </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+</section>

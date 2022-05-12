@@ -1,0 +1,62 @@
+<section class="manage-panel flex justify-center">
+    <div class="w-full max-w-xl py-24">
+        <%if(!messages.catName || !messages.subcatName){%>
+            <form action="/admin/subcategories/add" method="POST" class="rounded-lg px-4 py-4" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <h1 class="text-2xl text-center">Add new subcategory</h1>
+                </div>
+        <%}else{%>
+            <form action="/admin/subcategories/update" method="POST" class="rounded-lg px-4 py-4" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <h1 class="text-2xl text-center">Update subcategory</h1>
+                </div>
+            <%}%>
+            <div class="mb-4">
+                <span class="text-red-500 text-sm">
+                    <%if(messages.error){%>
+                        <%=messages.error%>
+                    <%} else {%>
+                        <%=messages.success%>
+                    <%}%>
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="catName">
+                    Category Name:
+                </label>
+                <%if(!messages.catName || !messages.subcatName){%>
+                    <input name="catName" value="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="catName" type="text" placeholder="Enter your category name">    
+                <%}else{%>
+                    <input name="catName" value="<%=messages.catName%>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="catName" type="text" placeholder="Enter your category name" disabled>    
+                <%}%>
+                <input name="subcatID" value="<%=messages.subcatID%>" type="hidden">
+                <input name="subcatImage" value="<%=messages.subcatImage%>" type="hidden">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="subcatName">
+                    Name:
+                </label>
+                <input name="subcatName" value="<%=messages.subcatName%>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subcatName" type="text" placeholder="Enter your subcategory name">    
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="description">
+                    Description:
+                </label>
+                <textarea name="description" id="description" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Description..."><%=messages.description%></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-white text-sm mb-2" for="formFile">
+                    Image:
+                </label>
+                <input name="subcatImage" class="form-control block w-full px-2 py-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile">
+            </div>
+            <div class="flex justify-end">
+                <button type="submit" class="btn-primary rounded-full px-4 py-1"><%=messages.catName || messages.subcatName ? 'Update' : 'Add'%></button>
+            </div>
+        </form>
+    </div>
+</section>

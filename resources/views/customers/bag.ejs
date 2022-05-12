@@ -1,0 +1,70 @@
+<section>
+    <% if(Object.keys(session.bag.items).length !== 0) { %>
+        <section class="bag backdrop-blur-lg bg-opacity-10 py-20">
+            <div class="order container mx-auto w-1/2">
+                <div class="flex items-center">
+                    <img class="w-10" src="/img/takeaway.png" alt="orderedPack">
+                    <h1 class=" ml-6 text-2xl">Order Summary</h1>
+                </div>
+
+                <!-- list -->
+                
+                <div class="food-list">
+                    
+                    <!-- items in list -->
+                    <!-- there is session and user variable declared local inside the server.js file for using it in ejs files -->
+                    <% for(let dish of Object.values(session.bag.items)) { %>    
+                        <div class="flex items-center my-8">
+                            <img class="w-24 rounded" src="/img/items/<%= dish.item.image %>" alt="<%= dish.item.image %>">
+                            <div class="ml-4 flex-1">
+                                <h1><%= dish.item.name%></h1>
+                            </div>
+                            <div class="flex-1">
+                                <button data-item="<%=JSON.stringify(dish.item)%>" class="inBagRemoveBTN"><i class="las la-minus-circle text-xl"></i></button>
+                                <span class="<%=dish.item._id%> mx-4"><%= dish.qty%></span>
+                                <button data-item="<%=JSON.stringify(dish.item)%>" class="inBagAddBTN"><i class="las la-plus-circle text-xl"></i></button>
+                            </div>
+                            <span class="<%=dish.item._id%> text-lg font-bold">₹<%=dish.item.price * dish.qty%></span>
+                        </div>
+                    <% } %>
+                </div>
+                <hr>
+
+                <div class="text-right py-4">
+                    <div>
+                        <span class="text-lg">Total ammount:</span>
+                        <span class="amount font-bold text-2xl ml-2">₹<%=session.bag.totalPrice%></span>
+                    </div>
+                    <% if(user) {%>
+                        <div>
+                            <form action="/orders" method="post" class="mt-12">
+                                <input type="text" name="phone" class="rounded-lg text-black border border-gray-400 p-2 mb-4 w-1/2" placeholder="Phone Number">
+                                <input type="text" name="address" class="rounded-lg text-black border border-gray-400 p-2 w-1/2" placeholder="Address">
+                                <div>
+                                    <button class="btn-submit inline-block px-4 py-2 mt-4 rounded-full" type="submit">Order Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    <% } else {%>
+
+                    <a href="/login" class="inline-block cursor-pointer px-4 py-2 mt-4 rounded-full btn-primary">Login to continue</a>
+                    
+                    <% } %>
+                </div>
+            </div>
+    </section>
+    <%} else {%>
+        <section class="backdrop-blur-lg bg-opacity-10">
+            <div class="py-10 backdrop-blur-xl bg-emerald-900 bg-opacity-10">
+                <div class="container mx-auto text-center items-center">
+                    <h1 class="text-3xl mb-2 font-bold">Your bag is Empty 😢</h1>
+                    <p class="text-gray-500 text-lg my-7">You haven't ordered anything yet,<br>
+                        to order something go to the main page.
+                    </p>
+                    <img class="w-2/5 mx-auto" src="/img/empty-bag1.png" alt="emptyBag">
+                    <a href="/" class="inline-block py-1 px-5 rounded-full btn-primary text-white">Go Back</a>
+                </div>
+            </div>
+        </section>
+    <%}%>
+</section>
