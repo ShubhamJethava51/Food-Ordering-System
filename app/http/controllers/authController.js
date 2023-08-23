@@ -127,8 +127,9 @@ function authController() {
     },
 
     logout(req, res) {
-      req.logout(); //this will remove 'user' object from 'req'
-      return res.redirect("/login");
+      return req.logOut(() => {
+        return res.redirect("/login");
+      }); //this will remove 'user' object from 'req'
     },
 
     forgotPassForm(req, res) {
@@ -185,7 +186,7 @@ function authController() {
                         if (err) {
                           req.flash(
                             "error",
-                            "Something went wrong while sending email!"
+                            "Something went wrong while sending email!",
                           );
                           return res.redirect("/forgotPassForm");
                         }
@@ -194,7 +195,7 @@ function authController() {
                   if (err) {
                     req.flash(
                       "error",
-                      "Something went wrong while creating token!"
+                      "Something went wrong while creating token!",
                     );
                     return res.redirect("/forgotPassForm");
                   }
@@ -217,7 +218,7 @@ function authController() {
                     if (err) {
                       req.flash(
                         "error",
-                        "Something went wrong while sending email!"
+                        "Something went wrong while sending email!",
                       );
                       return res.redirect("/forgotPassForm");
                     }
@@ -226,7 +227,7 @@ function authController() {
               if (err) {
                 req.flash(
                   "error",
-                  "Something went wrong while creating token!"
+                  "Something went wrong while creating token!",
                 );
                 return res.redirect("/forgotPassForm");
               }
@@ -298,7 +299,7 @@ function authController() {
                   if (err) {
                     req.flash(
                       "error",
-                      "Something went wrong while updating password!"
+                      "Something went wrong while updating password!",
                     );
                     return res.redirect("/login");
                   }
@@ -307,7 +308,7 @@ function authController() {
                     req.flash("success", "Updated password successfully!");
                     return res.redirect("/login");
                   }
-                }
+                },
               );
             }
             if (err) {

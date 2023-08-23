@@ -215,6 +215,7 @@ function categoryController() {
             );
           }
         } else {
+          //file is not given so not making changes in image
           category.updateOne(
             { _id: catID },
             {

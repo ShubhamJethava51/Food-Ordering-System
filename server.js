@@ -21,7 +21,8 @@ app.use(express.json());
 app.use(flash());
 
 //Database Connection
-const url = "mongodb://127.0.0.1:27017/kabir_food";
+const url =
+  "mongodb+srv://Shubham:Kabir2022@cluster0.wwhvy2r.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(url);
 const connection = mongoose.connection;
@@ -35,6 +36,7 @@ connection
 
 //Event emitter
 const eventEmitter = new Emitter();
+
 //we have to use same instance for making it work
 app.set("eventEmitter", eventEmitter);
 
@@ -54,7 +56,7 @@ app.use(
     store: mongoStore,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, //24 hours
-  })
+  }),
 );
 
 //passport configuration in server file(for login purpose)
