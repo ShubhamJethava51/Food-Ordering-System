@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "node server.js",
+    "start": "node server.js",
     "dev": "nodemon -L server.js",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "production": "mix --production"
+    "build": "npm install && npm run production", // Custom build script
   },
   "keywords": [],
   "author": "Shubham",
