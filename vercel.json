@@ -12,5 +12,8 @@
       "dest": "/"
     }
   ],
-  "public": "./public"
+  "files": [
+    "public/**/*",
+    "index.js"
+  ]
 }
