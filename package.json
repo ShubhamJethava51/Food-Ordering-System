@@ -2,13 +2,13 @@
   "name": "kabirfood",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "engines": {
     "node": "18.x"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon -L server.js",
+    "start": "node index.js",
+    "dev": "nodemon -L index.js",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "production": "mix --production"
