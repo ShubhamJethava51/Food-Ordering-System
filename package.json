@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon -L server.js",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "production": "mix --production"
-    "build": "npm install && npm run production", // Custom build script
+    "production": "mix --production",
+    "build": "npm install && npm run production"
   },
   "keywords": [],
   "author": "Shubham",
