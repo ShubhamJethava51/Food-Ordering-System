@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "build": "npm install && npm run production",
     "dev": "nodemon -L index.js",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
