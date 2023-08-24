@@ -11,8 +11,7 @@
     "dev": "nodemon -L server.js",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "production": "mix --production",
-    "build": "npm install && npm run production && npm run start"
+    "production": "mix --production"
   },
   "keywords": [],
   "author": "Shubham",
